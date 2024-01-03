@@ -25,7 +25,7 @@ AHBot = TelegramClient('BOT_USERNAME', API_ID, API_HASH)
   #  API_HASH,
    # BOT_TOKEN
 #) 
-UserBot = = TelegramClient(StringSession(USER_SESSION_STRING), API_ID, API_HASH)
+UserBot = TelegramClient(StringSession(USER_SESSION_STRING), API_ID, API_HASH)
 #Client(
  #   USER_SESSION_STRING,
   #  API_ID,
