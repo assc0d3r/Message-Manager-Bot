@@ -6,6 +6,8 @@ from database.access_database import mongodb
 from helpers.settings_msg import show_settings
 from helpers.message_deletor import delete_message
 from helpers.custom_filters_handler import setup_callbacks_for_custom_filters, blocked_words_loop, blocked_ext_checker
+from telethon.sessions import StringSession
+from telethon import TelegramClient, events
 
 from pyrogram import Client, filters, idle
 from pyrogram.types import Message, ForceReply, CallbackQuery, InlineKeyboardMarkup, InlineKeyboardButton
@@ -16,17 +18,18 @@ API_HASH = config("API_HASH")
 BOT_TOKEN = config("BOT_TOKEN")
 USER_SESSION_STRING = config("USER_SESSION_STRING")
               
-
-AHBot = Client(
-    BOT_USERNAME,
-    API_ID,
-    API_HASH,
-    BOT_TOKEN
-)
-UserBot = Client(
-    USER_SESSION_STRING,
-    API_ID,
-    API_HASH
+AHBot = TelegramClient('BOT_USERNAME', API_ID, API_HASH)
+#AHBot = Client(
+#    BOT_USERNAME,
+ #   API_ID,
+  #  API_HASH,
+   # BOT_TOKEN
+#) 
+UserBot = = TelegramClient(StringSession(USER_SESSION_STRING), API_ID, API_HASH)
+#Client(
+ #   USER_SESSION_STRING,
+  #  API_ID,
+   # API_HASH
 )
 
 
