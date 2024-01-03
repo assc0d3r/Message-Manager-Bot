@@ -1,4 +1,6 @@
 Pyrogram==1.4.16
+telethon
+cryptg
 TgCrypto
 dnspython
 motor
