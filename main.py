@@ -9,16 +9,23 @@ from helpers.custom_filters_handler import setup_callbacks_for_custom_filters, b
 from pyrogram import Client, filters, idle
 from pyrogram.types import Message, ForceReply, CallbackQuery, InlineKeyboardMarkup, InlineKeyboardButton
 
+API_ID = config("API_ID")
+BOT_USERNAME = config("BOT_USERNAME")
+API_HASH = config("API_HASH")
+BOT_TOKEN = config("BOT_TOKEN")
+USER_SESSION_STRING = config("USER_SESSION_STRING")
+              
+
 AHBot = Client(
-    Config.BOT_USERNAME,
-    Config.API_ID,
-    Config.API_HASH,
-    Config.BOT_TOKEN
+    BOT_USERNAME,
+    API_ID,
+    API_HASH,
+    BOT_TOKEN
 )
 UserBot = Client(
-    Config.USER_SESSION_STRING,
-    Config.API_ID,
-    Config.API_HASH
+    USER_SESSION_STRING,
+    API_ID,
+    API_HASH
 )
 
 
