@@ -30,7 +30,7 @@ UserBot = = TelegramClient(StringSession(USER_SESSION_STRING), API_ID, API_HASH)
  #   USER_SESSION_STRING,
   #  API_ID,
    # API_HASH
-)
+#)
 
 
 @AHBot.on_message(filters.command(['start', f'start@{Config.BOT_USERNAME}']))
