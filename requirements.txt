@@ -5,3 +5,4 @@ TgCrypto
 dnspython
 motor
 python-decouple
+aiohttp
