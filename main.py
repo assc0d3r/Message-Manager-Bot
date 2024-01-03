@@ -1,6 +1,7 @@
 # (c) @AbirHasan2005
 
 from configs import Config
+from decouple import config
 from database.access_database import mongodb
 from helpers.settings_msg import show_settings
 from helpers.message_deletor import delete_message
