@@ -18,7 +18,7 @@ API_HASH = config("API_HASH")
 BOT_TOKEN = config("BOT_TOKEN")
 USER_SESSION_STRING = config("USER_SESSION_STRING")
               
-AHBot = TelegramClient('BOT_USERNAME', API_ID, API_HASH)
+AHBot = TelegramClient(BOT_USERNAME, API_ID, API_HASH)
 #AHBot = Client(
 #    BOT_USERNAME,
  #   API_ID,
