@@ -10,13 +10,13 @@ from pyrogram import Client, filters, idle
 from pyrogram.types import Message, ForceReply, CallbackQuery, InlineKeyboardMarkup, InlineKeyboardButton
 
 AHBot = Client(
-    "session_string=Config.BOT_USERNAME",
+    "session_string"=Config.BOT_USERNAME,
     api_id=Config.API_ID,
     api_hash=Config.API_HASH,
     bot_token=Config.BOT_TOKEN
 )
 UserBot = Client(
-    "session_string=Config.USER_SESSION_STRING",
+    "session_string"=Config.USER_SESSION_STRING,
     api_id=Config.API_ID,
     api_hash=Config.API_HASH
 )
