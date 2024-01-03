@@ -1,5 +1,5 @@
 Pyrogram==1.4.16
-telethon
+telethon==1.9
 cryptg
 TgCrypto
 dnspython
