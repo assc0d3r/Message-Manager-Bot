@@ -32,7 +32,7 @@ UserBot = Client(
     api_hash=Config.API_HASH
 )
 
-@AHBot.on(filters.command(['start', f'start@{Config.BOT_USERNAME}']))
+@AHBot.on_message(filters.command(['start', f'start@{Config.BOT_USERNAME}']))
 async def start_handler(bot: Client, message: Message):
     if (not await mongodb.is_chat_exist(message.chat.id)) and (message.chat.type != "private"):
         try:
