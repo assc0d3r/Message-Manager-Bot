@@ -63,7 +63,7 @@ async def start_handler(bot: Client, message: Message):
     )
 
 
-@AHBot.on(filters.command(["settings", f"settings@{Config.BOT_USERNAME}"]) & ~filters.private & ~filters.edited)
+@AHBot.on(filters.command(["settings", f"settings@{Config.BOT_USERNAME}"]) & ~filters.private)
 async def settings_handler(bot: Client, message: Message):
     user = await bot.get_chat_member(chat_id=message.chat.id, user_id=message.from_user.id)
     print(f"User Status: {user.status}\nCan Change Info: {user.can_change_info}")
