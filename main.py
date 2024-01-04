@@ -246,7 +246,7 @@ async def callback_handlers(bot: Client, cb: CallbackQuery):
 
 
 AHBot.start()
-UserBot.loop.run_until_complete(callback_handlers())
+UserBot.start()
 idle()
-UserBot.loop.run_until_disconnected()
+UserBot.stop()
 AHBot.stop()
