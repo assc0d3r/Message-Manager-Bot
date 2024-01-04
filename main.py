@@ -63,7 +63,7 @@ async def start_handler(bot: Client, message: Message):
     )
 
 
-@AHBot.on(filters.command(["settings", f"settings@{Config.BOT_USERNAME}"]) & ~filters.private)
+@AHBot.on_message(filters.command(["settings", f"settings@{Config.BOT_USERNAME}"]) & ~filters.private & ~filters.edited)
 async def settings_handler(bot: Client, message: Message):
     user = await bot.get_chat_member(chat_id=message.chat.id, user_id=message.from_user.id)
     print(f"User Status: {user.status}\nCan Change Info: {user.can_change_info}")
@@ -93,7 +93,7 @@ async def settings_handler(bot: Client, message: Message):
     await show_settings(editable)
 
 
-@AHBot.on(filters.reply & filters.text & ~filters.private)
+@AHBot.on_message(filters.reply & filters.text & ~filters.private & ~filters.edited)
 async def reply_handler(bot: Client, message: Message):
     if not await mongodb.is_chat_exist(message.chat.id):
         return
@@ -134,7 +134,7 @@ async def reply_handler(bot: Client, message: Message):
         )
 
 
-@UserBot.on((filters.text | filters.media) & ~filters.private, group=-1)
+@UserBot.on_message((filters.text | filters.media) & ~filters.private & ~filters.edited, group=-1)
 async def main_handler(_, message: Message):
     if not await mongodb.is_chat_exist(message.chat.id):
         return
@@ -256,8 +256,8 @@ async def callback_handlers(bot: Client, cb: CallbackQuery):
         await cb.message.delete(True)
 
 
-AHBot.loop.run_until_complete()
-UserBot.loop.run_until_complete()
+AHBot.start()
+UserBot.start()
 idle()
-AHBot.loop.run_until_disconnected()
-UserBot.loop.run_until_disconnected()
+UserBot.stop()
+AHBot.stop()
