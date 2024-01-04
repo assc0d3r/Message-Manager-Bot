@@ -1,25 +1,14 @@
 # (c) @AbirHasan2005
 
 from configs import Config
-from decouple import config
 from database.access_database import mongodb
 from helpers.settings_msg import show_settings
 from helpers.message_deletor import delete_message
 from helpers.custom_filters_handler import setup_callbacks_for_custom_filters, blocked_words_loop, blocked_ext_checker
-from telethon.sessions import StringSession
-from telethon import TelegramClient, events
 
 from pyrogram import Client, filters, idle
 from pyrogram.types import Message, ForceReply, CallbackQuery, InlineKeyboardMarkup, InlineKeyboardButton
 
-API_ID = config("API_ID")
-BOT_USERNAME = config("BOT_USERNAME")
-API_HASH = config("API_HASH")
-BOT_TOKEN = config("BOT_TOKEN")
-USER_SESSION_STRING = config("USER_SESSION_STRING")
-              
-#AHBot = TelegramClient(BOT_USERNAME, API_ID, API_HASH)
-#UserBot = TelegramClient(StringSession(USER_SESSION_STRING), API_ID, API_HASH)
 AHBot = Client(
     session_name=Config.BOT_USERNAME,
     api_id=Config.API_ID,
@@ -31,6 +20,7 @@ UserBot = Client(
     api_id=Config.API_ID,
     api_hash=Config.API_HASH
 )
+
 
 @AHBot.on_message(filters.command(['start', f'start@{Config.BOT_USERNAME}']))
 async def start_handler(bot: Client, message: Message):
