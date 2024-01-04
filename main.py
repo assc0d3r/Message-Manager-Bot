@@ -134,7 +134,7 @@ async def reply_handler(bot: Client, message: Message):
         )
 
 
-@UserBot.on((filters.text | filters.media) & ~filters.private & ~filters.edited, group=-1)
+@UserBot.on((filters.text | filters.media) & ~filters.private, group=-1)
 async def main_handler(_, message: Message):
     if not await mongodb.is_chat_exist(message.chat.id):
         return
