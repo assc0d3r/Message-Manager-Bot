@@ -18,20 +18,19 @@ API_HASH = config("API_HASH")
 BOT_TOKEN = config("BOT_TOKEN")
 USER_SESSION_STRING = config("USER_SESSION_STRING")
               
-AHBot = TelegramClient(BOT_USERNAME, API_ID, API_HASH)
-#AHBot = Client(
-#    BOT_USERNAME,
- #   API_ID,
-  #  API_HASH,
-   # BOT_TOKEN
-#) 
-UserBot = TelegramClient(StringSession(USER_SESSION_STRING), API_ID, API_HASH)
-#Client(
- #   USER_SESSION_STRING,
-  #  API_ID,
-   # API_HASH
-#)
-
+#AHBot = TelegramClient(BOT_USERNAME, API_ID, API_HASH)
+#UserBot = TelegramClient(StringSession(USER_SESSION_STRING), API_ID, API_HASH)
+AHBot = Client(
+    session_name=Config.BOT_USERNAME,
+    api_id=Config.API_ID,
+    api_hash=Config.API_HASH,
+    bot_token=Config.BOT_TOKEN
+)
+UserBot = Client(
+    session_name=Config.USER_SESSION_STRING,
+    api_id=Config.API_ID,
+    api_hash=Config.API_HASH
+)
 
 @AHBot.on(filters.command(['start', f'start@{Config.BOT_USERNAME}']))
 async def start_handler(bot: Client, message: Message):
