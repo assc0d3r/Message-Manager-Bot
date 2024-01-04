@@ -93,7 +93,7 @@ async def settings_handler(bot: Client, message: Message):
     await show_settings(editable)
 
 
-@AHBot.on(filters.reply & filters.text & ~filters.private & ~filters.edited)
+@AHBot.on(filters.reply & filters.text & ~filters.private)
 async def reply_handler(bot: Client, message: Message):
     if not await mongodb.is_chat_exist(message.chat.id):
         return
