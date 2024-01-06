@@ -262,7 +262,7 @@ async def callback_handlers(bot: Client, cb: CallbackQuery):
         await cb.message.delete(True)
 
 
-await.AHBot.start()
+await AHBot.start()
 UserBot.start()
 idle()
 UserBot.stop()
