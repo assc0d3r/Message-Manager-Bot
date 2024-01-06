@@ -9,7 +9,7 @@ class Config(object):
     BOT_TOKEN = os.environ.get("BOT_TOKEN")
     USER_SESSION_STRING = os.environ.get("USER_SESSION_STRING")
     MONGODB_URI = os.environ.get("MONGODB_URI")
-    OWNER_ID = int(os.environ.get("OWNER_ID")
+    OWNER_ID = int(os.environ.get("OWNER_ID"))
     BOT_USERNAME = os.environ.get("BOT_USERNAME")
     LOG_CHANNEL = int(os.environ.get("LOG_CHANNEL"))
 
