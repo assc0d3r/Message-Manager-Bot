@@ -4,3 +4,4 @@ dnspython
 motor
 telethon
 cryptg
+python-decouple
