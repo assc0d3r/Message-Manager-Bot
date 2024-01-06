@@ -52,7 +52,7 @@ async def start_handler(bot: Client, message: Message):
     )
 
 
-@AHBot.on_message(filters.command(["settings", f"settings@{Config.BOT_USERNAME}"]) & ~filters.private & ~filters.edited)
+@AHBot.on_edited_message(filters.command(["settings", f"settings@{Config.BOT_USERNAME}"]) & ~filters.private)
 async def settings_handler(bot: Client, message: Message):
     user = await bot.get_chat_member(chat_id=message.chat.id, user_id=message.from_user.id)
     print(f"User Status: {user.status}\nCan Change Info: {user.can_change_info}")
@@ -82,7 +82,7 @@ async def settings_handler(bot: Client, message: Message):
     await show_settings(editable)
 
 
-@AHBot.on_message(filters.reply & filters.text & ~filters.private & ~filters.edited)
+@AHBot.on_edited_message(filters.reply & filters.text & ~filters.private)
 async def reply_handler(bot: Client, message: Message):
     if not await mongodb.is_chat_exist(message.chat.id):
         return
@@ -123,7 +123,7 @@ async def reply_handler(bot: Client, message: Message):
         )
 
 
-@UserBot.on_message((filters.text | filters.media) & ~filters.private & ~filters.edited, group=-1)
+@UserBot.on_edited_message((filters.text | filters.media) & ~filters.private, group=-1)
 async def main_handler(_, message: Message):
     if not await mongodb.is_chat_exist(message.chat.id):
         return
