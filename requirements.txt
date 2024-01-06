@@ -2,3 +2,5 @@ Pyrogram
 TgCrypto
 dnspython
 motor
+telethon
+cryptg
