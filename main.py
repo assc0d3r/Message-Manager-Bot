@@ -13,6 +13,16 @@ from telethon import TelegramClient, events
 from decouple import config
 import logging
 from telethon.sessions import StringSession
+logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s', level=logging.WARNING)
+
+    API_ID = config("API_ID")
+    API_HASH = config("API_HASH")
+    BOT_TOKEN = config("BOT_TOKEN")
+    SESSION_STRING = config("SESSION_STRING", "in_memory=True")
+    MONGODB_URI = config("MONGODB_URI")
+    OWNER_ID = config("OWNER_ID")
+    BOT_USERNAME = config("BOT_USERNAME")
+    LOG_CHANNEL = config("LOG_CHANNEL")
 
 AHBot = TelegramClient('BOT_TOKEN', API_ID, API_HASH)
 #Client(
