@@ -16,7 +16,7 @@ AHBot = Client(
     bot_token=Config.BOT_TOKEN
 )
 UserBot = Client(
-    name=Config.USER_SESSION_STRING,
+    name=Config.SESSION_STRING,
     api_id=Config.API_ID,
     api_hash=Config.API_HASH
 )
