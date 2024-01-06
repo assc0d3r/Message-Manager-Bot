@@ -8,7 +8,7 @@ from helpers.custom_filters_handler import setup_callbacks_for_custom_filters, b
 
 from pyrogram import Client, filters, idle
 from pyrogram.types import Message, ForceReply, CallbackQuery, InlineKeyboardMarkup, InlineKeyboardButton
-
+from decouple import config
 from telethon import TelegramClient, events
 from decouple import config
 import logging
