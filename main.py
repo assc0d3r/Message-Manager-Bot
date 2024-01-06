@@ -9,17 +9,24 @@ from helpers.custom_filters_handler import setup_callbacks_for_custom_filters, b
 from pyrogram import Client, filters, idle
 from pyrogram.types import Message, ForceReply, CallbackQuery, InlineKeyboardMarkup, InlineKeyboardButton
 
-AHBot = Client(
-    name=Config.BOT_USERNAME,
-    api_id=Config.API_ID,
-    api_hash=Config.API_HASH,
-    bot_token=Config.BOT_TOKEN
-)
-UserBot = Client(
-    name=Config.SESSION_STRING,
-    api_id=Config.API_ID,
-    api_hash=Config.API_HASH
-)
+from telethon import TelegramClient, events
+from decouple import config
+import logging
+from telethon.sessions import StringSession
+
+AHBot = TelegramClient('BOT_TOKEN', API_ID, API_HASH)
+#Client(
+  #  name=Config.BOT_USERNAME,
+   # api_id=Config.API_ID,
+   # api_hash=Config.API_HASH,
+   # bot_token=Config.BOT_TOKEN
+#)
+UserBot = TelegramClient(StringSession(SESSION_STRING), API_ID, API_HASH)
+#Client(
+ #   name=Config.SESSION_STRING,
+#    api_id=Config.API_ID,
+ #   api_hash=Config.API_HASH
+#)
 
 
 @AHBot.on_message(filters.command(['start', f'start@{Config.BOT_USERNAME}']))
