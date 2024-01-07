@@ -10,7 +10,6 @@ from pyrogram import Client, filters, idle
 from pyrogram.types import Message, ForceReply, CallbackQuery, InlineKeyboardMarkup, InlineKeyboardButton
 from decouple import config
 from telethon import TelegramClient, events
-from decouple import config
 import logging
 from telethon.sessions import StringSession
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s', level=logging.DEBUG)
