@@ -23,7 +23,7 @@ UserBot = Client(
 
 
 @AHBot.on_message(filters.command(['start', f'start@{Config.BOT_USERNAME}']))
-async def start_handler(bot: AHBot, message: Message):
+async def start_handler(bot: Client, message: Message):
     if (not await mongodb.is_chat_exist(message.chat.id)) and (message.chat.type != "private"):
         try:
             getChat = await bot.get_chat(chat_id=message.chat.id)
@@ -245,7 +245,7 @@ async def callback_handlers(bot: Client, cb: CallbackQuery):
         await cb.message.delete(True)
 
 
-AHBot.start(start_handler())
+AHBot.start(main_handler())
 UserBot.start()
 idle()
 UserBot.stop()
