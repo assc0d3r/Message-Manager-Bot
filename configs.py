@@ -28,3 +28,4 @@ Custom Filters is for deleting only separate type Media Messages or Only Text Me
 Like you can set only delete `photo` or `video` or `document` or `audio` or `text` ...
 
 If Need More Help Ask in [Support Group](https://t.me/JoinOT)!
+"""
