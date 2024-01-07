@@ -5,40 +5,24 @@ from database.access_database import mongodb
 from helpers.settings_msg import show_settings
 from helpers.message_deletor import delete_message
 from helpers.custom_filters_handler import setup_callbacks_for_custom_filters, blocked_words_loop, blocked_ext_checker
-import asyncio
+
 from pyrogram import Client, filters, idle
 from pyrogram.types import Message, ForceReply, CallbackQuery, InlineKeyboardMarkup, InlineKeyboardButton
-from decouple import config
-from telethon import TelegramClient, events
-import logging
-from telethon.sessions import StringSession
-logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s', level=logging.DEBUG)
 
-API_ID = config("API_ID")
-API_HASH = config("API_HASH")
-BOT_TOKEN = config("BOT_TOKEN")
-SESSION_STRING = config("SESSION_STRING", "in_memory=True")
-MONGODB_URI = config("MONGODB_URI")
-OWNER_ID = config("OWNER_ID")
-BOT_USERNAME = config("BOT_USERNAME")
-LOG_CHANNEL = config("LOG_CHANNEL")
-
-AHBot = TelegramClient('BOT_TOKEN', API_ID, API_HASH)
-#Client(
-  #  name=Config.BOT_USERNAME,
-   # api_id=Config.API_ID,
-   # api_hash=Config.API_HASH,
-   # bot_token=Config.BOT_TOKEN
-#)
-UserBot = TelegramClient(StringSession(SESSION_STRING), API_ID, API_HASH)
-#Client(
- #   name=Config.SESSION_STRING,
-#    api_id=Config.API_ID,
- #   api_hash=Config.API_HASH
-#)
+AHBot = Client(
+    session_name=Config.BOT_USERNAME,
+    api_id=Config.API_ID,
+    api_hash=Config.API_HASH,
+    bot_token=Config.BOT_TOKEN
+)
+UserBot = Client(
+    session_name=Config.USER_SESSION_STRING,
+    api_id=Config.API_ID,
+    api_hash=Config.API_HASH
+)
 
 
-@AHBot.get_messages(filters.command(['start', f'start@{Config.BOT_USERNAME}']))
+@AHBot.on_message(filters.command(['start', f'start@{Config.BOT_USERNAME}']))
 async def start_handler(bot: Client, message: Message):
     if (not await mongodb.is_chat_exist(message.chat.id)) and (message.chat.type != "private"):
         try:
@@ -68,7 +52,7 @@ async def start_handler(bot: Client, message: Message):
     )
 
 
-@AHBot.get_messages(filters.command(["settings", f"settings@{Config.BOT_USERNAME}"]) & ~filters.private)
+@AHBot.on_message(filters.command(["settings", f"settings@{Config.BOT_USERNAME}"]) & ~filters.private & ~filters.edited)
 async def settings_handler(bot: Client, message: Message):
     user = await bot.get_chat_member(chat_id=message.chat.id, user_id=message.from_user.id)
     print(f"User Status: {user.status}\nCan Change Info: {user.can_change_info}")
@@ -98,7 +82,7 @@ async def settings_handler(bot: Client, message: Message):
     await show_settings(editable)
 
 
-@AHBot.get_messages(filters.reply & filters.text & ~filters.private)
+@AHBot.on_message(filters.reply & filters.text & ~filters.private & ~filters.edited)
 async def reply_handler(bot: Client, message: Message):
     if not await mongodb.is_chat_exist(message.chat.id):
         return
@@ -139,7 +123,7 @@ async def reply_handler(bot: Client, message: Message):
         )
 
 
-@UserBot.get_messages((filters.text | filters.media) & ~filters.private, group=-1)
+@UserBot.on_message((filters.text | filters.media) & ~filters.private & ~filters.edited, group=-1)
 async def main_handler(_, message: Message):
     if not await mongodb.is_chat_exist(message.chat.id):
         return
@@ -259,6 +243,8 @@ async def callback_handlers(bot: Client, cb: CallbackQuery):
             )
     elif "closeMeh" in cb.data:
         await cb.message.delete(True)
+
+
 AHBot.start()
 UserBot.start()
 idle()
