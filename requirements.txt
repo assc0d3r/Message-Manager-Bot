@@ -1,5 +1,6 @@
 gunicorn
 uvicorn
+flask
 Pyrogram==1.4.16
 TgCrypto
 dnspython
