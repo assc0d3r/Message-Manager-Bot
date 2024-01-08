@@ -160,7 +160,7 @@ async def main_handler(_, message: Message):
     print("Message Not Deleted!")
 
 
-@AHBot.on_callback_query().run()
+@AHBot.on_callback_query()
 async def callback_handlers(bot: Client, cb: CallbackQuery):
     user = await bot.get_chat_member(chat_id=cb.message.chat.id, user_id=cb.from_user.id)
     print(f"User Status: {user.status}\nCan Change Info: {user.can_change_info}")
